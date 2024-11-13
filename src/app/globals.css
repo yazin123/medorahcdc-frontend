@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@import 'react-quill/dist/quill.snow.css';
+
+html, body {
+    background-color: #ffffff !important;
+    background: #ffffff !important;
+}
+
+/* Additional specificity for Chrome */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    html, body {
+        background-color: #ffffff !important;
+        background: #ffffff !important;
+    }
+}
