@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
+import AdminLayout from '../../admin';
 
 export default function ContactsAdmin() {
     const [contacts, setContacts] = useState([]);
@@ -92,6 +93,7 @@ export default function ContactsAdmin() {
     );
 
     return (
+        <AdminLayout>
         <div className="min-h-screen  py-12 px-4 sm:px-6 lg:px-8 mt-20 mb-32 max-w-7xl mx-auto ml-64">
             <h1 className="text-3xl font-bold mb-8">Contact Details Admin</h1>
             
@@ -203,5 +205,6 @@ export default function ContactsAdmin() {
                 </table>
             </div>
         </div>
+        </AdminLayout>
     );
 }

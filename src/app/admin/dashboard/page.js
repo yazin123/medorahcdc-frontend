@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Sun, Moon, Sunrise, Clock, BookOpen, Phone, HelpCircle, Image, Wrench, Users, MessageCircle } from 'lucide-react';
 import Link from 'next/link';
+import AdminLayout from '../admin';
 
 const WelcomeDashboard = ({ userName = 'there' }) => {
     const [greeting, setGreeting] = useState('');
@@ -51,6 +52,7 @@ const WelcomeDashboard = ({ userName = 'there' }) => {
 
     return (
         <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8 mt-20 mb-32 max-w-7xl mx-auto ml-64">
+                <AdminLayout>
             <div className="p-6 bg-gradient-to-br from-white to-gray-50">
                 <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
                     <div className="flex-1">
@@ -97,6 +99,7 @@ const WelcomeDashboard = ({ userName = 'there' }) => {
                     </div>
                 </div>
             </div>
+            </AdminLayout>
         </div>
     );
 };

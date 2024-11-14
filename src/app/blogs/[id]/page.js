@@ -75,7 +75,7 @@ const BlogPost = ({ params }) => {
                 <div className="absolute inset-0">
                     {blog.image && blog.image[0] && (
                         <Image
-                            src={`${process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE_blog}${blog.image[0]}`}
+                            src={`${blog.image[0]}`}
                             alt={blog.title}
                             fill
                             className="object-cover"
@@ -119,7 +119,7 @@ const BlogPost = ({ params }) => {
                         {blog.image.slice(1).map((img, i) => (
                             <div key={i} className="aspect-square rounded-lg overflow-hidden bg-gray-100">
                                 <Image
-                                    src={`${process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE_blog}${img}`}
+                                    src={`${img}`}
                                     alt={`Blog image ${i + 1}`}
                                     width={400}
                                     height={400}

@@ -8,7 +8,6 @@ const Services = () => {
   const scrollContainerRef = useRef(null);
   const [services, setServices] = useState([]);
   const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
-  const base_urlimg = process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE;
 
   const slugify = (text) => {
     return text
@@ -37,6 +36,7 @@ const Services = () => {
       const response = await fetch(`${base_url}services`);
       if (!response.ok) throw new Error('Failed to fetch services');
       const data = await response.json();
+      console.log("services are :", data)
       setServices(data);
     } catch (error) {
       console.log('Error loading services. Please try again later.');
@@ -95,12 +95,12 @@ const Services = () => {
           {services.map((service, index) => (
             <Link href={`/services/${slugify(service.title)}`}
               key={index}
-              className="flex-none w-full   lg:w-[calc(83.333%)] max-w-[230px]" data-aos="fade-up" data-aos-delay={`${index}00`}
+              className="flex-none w-full   max-w-[330px]" data-aos="fade-up" data-aos-delay={`${index}00`}
             >
               <div className="bg-white  overflow-hidden ">
                 <div className="aspect-w-16 aspect-h-9 mb-4">
                   <Image
-                    src={`${base_urlimg}/services/${service.imageUrl}`}
+                    src={`${service.imageUrl}`}
                     alt={service.title}
                     width={500}
                     height={500}
@@ -109,7 +109,7 @@ const Services = () => {
                   />
                 </div>
                 <div className="pl-2 pr-2">
-                  <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
+                  <h3 className="text-xl font-semibold mb-2">{service.title} </h3>
                   {/* <p className="text-gray-600 text-justify">{service.description} </p> */}
 
                 </div>

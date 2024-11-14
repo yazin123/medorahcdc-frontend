@@ -1,41 +1,24 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { FaPlus, FaEdit, FaTrash } from 'react-icons/fa';
 
 const GalleryPage = () => {
+  const [gallery, setGallery] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
 
-  const galleryImages = [
-    {
-      title: "Play Therapy Room",
-      description: "A safe and welcoming space for children",
-      category: "Indoor"
-    },
-    {
-      title: "Art Corner",
-      description: "Where creativity meets healing",
-      category: "Indoor"
-    },
-    {
-      title: "Sensory Garden",
-      description: "Natural healing environment",
-      category: "Outdoor"
-    },
-    {
-      title: "Reading Nook",
-      description: "Quiet space for storytelling",
-      category: "Indoor"
-    },
-    {
-      title: "Group Activity Area",
-      description: "Building connections together",
-      category: "Indoor"
-    },
-    {
-      title: "Therapy Garden",
-      description: "Peaceful outdoor healing space",
-      category: "Outdoor"
+  useEffect(() => {
+    fetchGalleryItems();
+  }, []);
+
+  const fetchGalleryItems = async () => {
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}gallery`);
+      const data = await response.json();
+      setGallery(data);
+    } catch (error) {
+      console.error('Error fetching gallery items:', error);
     }
-  ];
+  };
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-12 mt-16">
@@ -47,15 +30,11 @@ const GalleryPage = () => {
 
       {/* Gallery Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {galleryImages.map((image, index) => (
-          <div 
-            key={index}
-            className="group cursor-pointer"
-            onClick={() => setSelectedImage(image)}
-          >
+        {gallery.map((image, index) => (
+          <div key={index} className="group cursor-pointer" onClick={() => setSelectedImage(image)}>
             <div className="relative overflow-hidden rounded-lg">
               <img
-                src={`/blog.png`}
+                src={image.image}
                 alt={image.title}
                 className="w-full h-64 object-cover transform transition-transform duration-300 group-hover:scale-105"
               />
@@ -81,17 +60,17 @@ const GalleryPage = () => {
 
       {/* Modal */}
       {selectedImage && (
-        <div 
+        <div
           className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4"
           onClick={() => setSelectedImage(null)}
         >
-          <div 
+          <div
             className="bg-white rounded-lg max-w-3xl w-full overflow-hidden"
-            onClick={e => e.stopPropagation()}
+            onClick={(e) => e.stopPropagation()}
           >
             <div className="relative">
               <img
-                src={`/blog.png`}
+                src={selectedImage.image}
                 alt={selectedImage.title}
                 className="w-full h-auto"
               />

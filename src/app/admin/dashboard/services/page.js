@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { FaPlus, FaEdit, FaTrash, FaSave, FaTimes, FaExclamationCircle } from 'react-icons/fa';
 import Image from 'next/image';
 import ServiceManagement from './ServiceManagement';
+import AdminLayout from '../../admin';
 
 const ServiceAdminDashboard = () => {
   const [services, setServices] = useState([]);
@@ -147,6 +148,7 @@ const ServiceAdminDashboard = () => {
   };
 
   return (
+    <AdminLayout>
     <div className="min-h-screen  py-12 px-4 sm:px-6 lg:px-8 mt-20 mb-32 max-w-7xl mx-auto ml-64">
 
       <h1 className="text-3xl font-bold">Service Admin Dashboard</h1>
@@ -253,6 +255,7 @@ const ServiceAdminDashboard = () => {
       </div>
 
     </div>
+    </AdminLayout>
   );
 };
 

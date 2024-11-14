@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaEdit, FaTrash, FaSave, FaTimes } from 'react-icons/fa';
 import Image from 'next/image';
 
@@ -10,6 +10,10 @@ const ServiceManagement = ({ service, onUpdate, onDelete, teams }) => {
   const [imagePreview, setImagePreview] = useState(null);
 
   const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
+
+  useEffect(() => {
+    setEditedService(service);
+  }, [service]);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -28,6 +32,7 @@ const ServiceManagement = ({ service, onUpdate, onDelete, teams }) => {
 
   const handleUpdate = async () => {
     try {
+      console.log("updatinggg")
       setLoading(true);
       setError('');
 
@@ -36,9 +41,7 @@ const ServiceManagement = ({ service, onUpdate, onDelete, teams }) => {
       formData.append('description', editedService.description);
       formData.append('howitworks', editedService.howitworks);
       formData.append('whatisService', editedService.whatisService);
-      editedService.handledBy.forEach(teamId => {
-        formData.append('handledBy', teamId);
-      });
+      formData.append('handledBy', JSON.stringify(editedService.handledBy));
 
       if (editedService.image) {
         formData.append('image', editedService.image);
@@ -49,17 +52,20 @@ const ServiceManagement = ({ service, onUpdate, onDelete, teams }) => {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
         },
-        body: formData,
+        body: formData
       });
 
-      if (!response.ok) throw new Error('Failed to update service');
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to update service');
+      }
 
       const updatedService = await response.json();
       onUpdate(updatedService);
       setIsEditing(false);
       setImagePreview(null);
     } catch (err) {
-      setError('Failed to update service. Please try again.');
+      setError(err.message || 'Failed to update service. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -101,7 +107,7 @@ const ServiceManagement = ({ service, onUpdate, onDelete, teams }) => {
           {service.imageUrl && (
             <div className="relative w-full h-48">
               <Image
-                src={`${process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE}/services/${service.imageUrl}`}
+                src={`${service.imageUrl}`}
                 alt={service.title}
                 fill
                 className="object-cover"
@@ -223,9 +229,9 @@ const ServiceManagement = ({ service, onUpdate, onDelete, teams }) => {
               </button>
               <button
                 onClick={() => {
-                  setIsEditing(false);
                   setEditedService(service);
                   setImagePreview(null);
+                  setIsEditing(false);
                 }}
                 className="px-6 py-2 bg-gray-100 rounded-lg hover:bg-gray-200 flex items-center"
               >

@@ -1,6 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react';
 import { FaPlus, FaEdit, FaTrash, FaSave, FaTimes, FaArrowUp, FaArrowDown } from 'react-icons/fa';
+import AdminLayout from '../../admin';
 
 const FAQManagement = () => {
     const baseurl = process.env.NEXT_PUBLIC_API_BASE_URL
@@ -108,6 +109,7 @@ const FAQManagement = () => {
     };
 
     return (
+        <AdminLayout>
         <div className="min-h-screen  py-12 px-4 sm:px-6 lg:px-8 mt-20 mb-32 max-w-7xl mx-auto ml-64">
 
             <div className="flex justify-between items-center mb-6">
@@ -219,6 +221,7 @@ const FAQManagement = () => {
                 ))}
             </div>
         </div>
+        </AdminLayout>
     );
 };
 

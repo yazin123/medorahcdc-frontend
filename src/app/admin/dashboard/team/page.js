@@ -1,183 +1,185 @@
 'use client'
 import React, { useState, useEffect } from 'react';
 import { FaLinkedin, FaTwitter, FaFacebook, FaTrashAlt, FaEdit, FaUserPlus, FaTimes, FaImage, FaSpinner } from 'react-icons/fa';
+import AdminLayout from '../../admin';
 
 const TeamManagement = () => {
-    const [team, setTeam] = useState([]);
-    const [newMember, setNewMember] = useState({
-        name: '',
-        position: '',
-        bio: '',
-        image: null,
-        socialLinks: {
+  const [team, setTeam] = useState([]);
+  const [newMember, setNewMember] = useState({
+    name: '',
+    position: '',
+    bio: '',
+    image: null,
+    socialLinks: {
+      linkedin: '',
+      twitter: '',
+      facebook: ''
+    }
+  });
+  const [editingMember, setEditingMember] = useState(null);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchTeamMembers();
+  }, []);
+
+  const fetchTeamMembers = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}team`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch team members');
+      }
+      const data = await response.json();
+      setTeam(data);
+    } catch (error) {
+      setError('Error fetching team members: ' + error.message);
+      console.error('Error fetching team members:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleImageChange = (e, isEditing = false) => {
+    const file = e.target.files[0];
+    if (file) {
+      if (file.size > 5 * 1024 * 1024) {
+        setError('Image size should be less than 5MB');
+        e.target.value = '';
+        return;
+      }
+
+      if (!file.type.startsWith('image/')) {
+        setError('Please upload only image files');
+        e.target.value = '';
+        return;
+      }
+
+      if (isEditing) {
+        setEditingMember({ ...editingMember, image: file });
+      } else {
+        setNewMember({ ...newMember, image: file });
+      }
+    }
+  };
+
+  const handleCreateMember = async (e) => {
+    e.preventDefault();
+    try {
+      setLoading(true);
+      const formData = new FormData();
+      formData.append('name', newMember.name);
+      formData.append('position', newMember.position);
+      formData.append('bio', newMember.bio);
+      formData.append('linkedin', newMember.socialLinks.linkedin);
+      formData.append('twitter', newMember.socialLinks.twitter);
+      formData.append('facebook', newMember.socialLinks.facebook);
+
+      if (newMember.image) {
+        formData.append('image', newMember.image);
+      }
+
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}team`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
+        },
+        body: formData
+      });
+
+      if (response.status === 201) {
+        setNewMember({
+          name: '',
+          position: '',
+          bio: '',
+          image: null,
+          socialLinks: {
             linkedin: '',
             twitter: '',
             facebook: ''
-        }
-    });
-    const [editingMember, setEditingMember] = useState(null);
-    const [error, setError] = useState('');
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
+          }
+        });
+        setError('');
         fetchTeamMembers();
-    }, []);
+      } else {
+        const errorData = await response.json();
+        setError(`Error creating team member: ${errorData.error}`);
+      }
+    } catch (error) {
+      setError(`Error creating team member: ${error.message}`);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    const fetchTeamMembers = async () => {
-        try {
-            setLoading(true);
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}team`);
-            if (!response.ok) {
-                throw new Error('Failed to fetch team members');
-            }
-            const data = await response.json();
-            setTeam(data);
-        } catch (error) {
-            setError('Error fetching team members: ' + error.message);
-            console.error('Error fetching team members:', error);
-        } finally {
-            setLoading(false);
+  const handleUpdateMember = async (e) => {
+    e.preventDefault();
+    try {
+      setLoading(true);
+      const formData = new FormData();
+      formData.append('name', editingMember.name);
+      formData.append('position', editingMember.position);
+      formData.append('bio', editingMember.bio);
+      formData.append('linkedin', editingMember.socialLinks.linkedin);
+      formData.append('twitter', editingMember.socialLinks.twitter);
+      formData.append('facebook', editingMember.socialLinks.facebook);
+
+      if (editingMember.image instanceof File) {
+        formData.append('image', editingMember.image);
+      }
+
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}team/${editingMember._id}`, {
+        method: 'PATCH',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
+        },
+        body: formData
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to update team member');
+      }
+
+      setEditingMember(null);
+      fetchTeamMembers();
+    } catch (error) {
+      setError('Error updating team member: ' + error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleDeleteMember = async (id) => {
+    if (!window.confirm('Are you sure you want to delete this team member?')) {
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}team/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
         }
-    };
+      });
 
-    const handleImageChange = (e, isEditing = false) => {
-        const file = e.target.files[0];
-        if (file) {
-            if (file.size > 5 * 1024 * 1024) {
-                setError('Image size should be less than 5MB');
-                e.target.value = '';
-                return;
-            }
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to delete team member');
+      }
 
-            if (!file.type.startsWith('image/')) {
-                setError('Please upload only image files');
-                e.target.value = '';
-                return;
-            }
+      fetchTeamMembers();
+    } catch (error) {
+      setError('Error deleting team member: ' + error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-            if (isEditing) {
-                setEditingMember({ ...editingMember, image: file });
-            } else {
-                setNewMember({ ...newMember, image: file });
-            }
-        }
-    };
-
-    const handleCreateMember = async (e) => {
-        e.preventDefault();
-        try {
-            setLoading(true);
-            const formData = new FormData();
-            formData.append('name', newMember.name);
-            formData.append('position', newMember.position);
-            formData.append('bio', newMember.bio);
-            formData.append('linkedin', newMember.socialLinks.linkedin);
-            formData.append('twitter', newMember.socialLinks.twitter);
-            formData.append('facebook', newMember.socialLinks.facebook);
-
-            if (newMember.image) {
-                formData.append('image', newMember.image);
-            }
-
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}team`, {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
-                },
-                body: formData
-            });
-
-            if (response.status === 201) {
-                setNewMember({
-                    name: '',
-                    position: '',
-                    bio: '',
-                    image: null,
-                    socialLinks: {
-                        linkedin: '',
-                        twitter: '',
-                        facebook: ''
-                    }
-                });
-                setError('');
-                fetchTeamMembers();
-            } else {
-                const errorData = await response.json();
-                setError(`Error creating team member: ${errorData.error}`);
-            }
-        } catch (error) {
-            setError(`Error creating team member: ${error.message}`);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    const handleUpdateMember = async (e) => {
-        e.preventDefault();
-        try {
-            setLoading(true);
-            const formData = new FormData();
-            formData.append('name', editingMember.name);
-            formData.append('position', editingMember.position);
-            formData.append('bio', editingMember.bio);
-            formData.append('linkedin', editingMember.socialLinks.linkedin);
-            formData.append('twitter', editingMember.socialLinks.twitter);
-            formData.append('facebook', editingMember.socialLinks.facebook);
-
-            if (editingMember.image instanceof File) {
-                formData.append('image', editingMember.image);
-            }
-
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}team/${editingMember._id}`, {
-                method: 'PATCH',
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
-                },
-                body: formData
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.error || 'Failed to update team member');
-            }
-
-            setEditingMember(null);
-            fetchTeamMembers();
-        } catch (error) {
-            setError('Error updating team member: ' + error.message);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    const handleDeleteMember = async (id) => {
-        if (!window.confirm('Are you sure you want to delete this team member?')) {
-            return;
-        }
-
-        try {
-            setLoading(true);
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}team/${id}`, {
-                method: 'DELETE',
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
-                }
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.error || 'Failed to delete team member');
-            }
-
-            fetchTeamMembers();
-        } catch (error) {
-            setError('Error deleting team member: ' + error.message);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    return (
+  return (
+    <AdminLayout>
         <div className="min-h-screen  py-12 px-4 sm:px-6 lg:px-8 mt-20 mb-32 ml-64">
             <div className="max-w-7xl mx-auto">
                 <div className="flex items-center justify-between mb-8">
@@ -317,7 +319,7 @@ const TeamManagement = () => {
                             {member.image && (
                                 <div className="relative h-48">
                                     <img
-                                        src={`${process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE}/${member.image}`}
+                                        src={`${member.image}`}
                                         alt={member.name}
                                         className="w-full h-full object-cover"
                                         crossOrigin="anonymous"
@@ -518,6 +520,7 @@ const TeamManagement = () => {
                 )}
             </div>
         </div>
+        </AdminLayout>
     );
 };
 

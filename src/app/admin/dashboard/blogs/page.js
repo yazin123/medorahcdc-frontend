@@ -11,6 +11,7 @@ import {
   FaImage,
   FaSpinner,
 } from 'react-icons/fa';
+import AdminLayout from '../../admin';
 
 // Create a custom Quill wrapper component
 const QuillWrapper = dynamic(
@@ -21,7 +22,7 @@ const QuillWrapper = dynamic(
         const quillRef = useRef();
 
         useEffect(() => {
-          if (typeof window !== 'undefined') {
+          if (typeof (window) !== 'undefined') {
             Promise.all([
               import('quill'),
               import('react-quill/dist/quill.snow.css')
@@ -127,7 +128,7 @@ const BlogManagement = () => {
 
   // Add CSS for Quill
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof (window) !== 'undefined') {
       const link = document.createElement('link');
       link.href = 'https://cdn.quilljs.com/1.3.6/quill.snow.css';
       link.rel = 'stylesheet';
@@ -199,7 +200,7 @@ const BlogManagement = () => {
       ...prev,
       images: prev.images.filter((_, i) => i !== index)
     }));
-    
+
     // Revoke object URL if it's a new image
     if (imagePreviewUrls[index].isNew) {
       URL.revokeObjectURL(imagePreviewUrls[index].url);
@@ -207,9 +208,9 @@ const BlogManagement = () => {
     setImagePreviewUrls(prev => prev.filter((_, i) => i !== index));
   };
   const renderImagePreview = (previewData, index) => {
-    const imageUrl = previewData.isNew 
-      ? previewData.url 
-      : `${process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE_blog}${previewData.url}`;
+    const imageUrl = previewData.isNew
+      ? previewData.url
+      : `${previewData.url}`;
 
     return (
       <div key={index} className="relative group">
@@ -362,210 +363,213 @@ const BlogManagement = () => {
 
   return (
     <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8 mt-20 mb-32 max-w-7xl mx-auto  ml-64">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-gray-900">Blog Management</h1>
-        <button
-          onClick={() => setIsModalOpen(true)}
-          className="bg-blue-600 text-white px-6 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-700 transition duration-200 shadow-md"
-        >
-          <FaPlus /> New Blog
-        </button>
-      </div>
+      <AdminLayout>
 
-      {/* Blog List */}
-      <div className="bg-white rounded-xl shadow-md overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead className="bg-gray-100">
-              <tr>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">Title</th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">Author</th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">Created At</th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">Images</th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">Actions</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-200">
-              {blogs.map(blog => (
-                <tr key={blog._id} className="hover:bg-gray-50">
-                  <td className="px-6 py-4 text-sm text-gray-900">{blog.title}</td>
-                  <td className="px-6 py-4 text-sm text-gray-600">{blog.author}</td>
-                  <td className="px-6 py-4 text-sm text-gray-600">
-                    {new Date(blog.createdAt).toLocaleDateString()}
-                  </td>
-                  <td className="px-6 py-4">
-                    <div className="flex -space-x-2">
-                      {blog.image?.slice(0, 3).map((img, index) => (
-                        <div key={index} className="h-8 w-8 rounded-full border-2 border-white overflow-hidden">
-                          <Image
-                            src={`${process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE_blog}${img}`}
-                            alt={`Blog image ${index + 1}`}
-                            width={32}
-                            height={32}
-                            className="object-cover"
-                          />
-                          {console.log("images -", img)}
-                        </div>
-                      ))}
-                      {blog.image?.length > 3 && (
-                        <div className="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center text-xs text-gray-600 border-2 border-white">
-                          +{blog.image.length - 3}
-                        </div>
-                      )}
-                    </div>
-                  </td>
-                  <td className="px-6 py-4">
-                    <div className="flex gap-3">
-                      <button
-                        onClick={() => handleEdit(blog)}
-                        className="text-blue-600 hover:text-blue-800 transition-colors"
-                        title="Edit"
-                      >
-                        <FaEdit size={20} />
-                      </button>
-                      <button
-                        onClick={() => handleDelete(blog._id)}
-                        className="text-red-600 hover:text-red-800 transition-colors"
-                        title="Delete"
-                      >
-                        <FaTrash size={20} />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-3xl font-bold text-gray-900">Blog Management</h1>
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="bg-blue-600 text-white px-6 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-700 transition duration-200 shadow-md"
+          >
+            <FaPlus /> New Blog
+          </button>
         </div>
-      </div>
 
-      {/* Modal Form */}
-      {isModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-xl p-6 w-full max-w-4xl max-h-[90vh] overflow-y-auto">
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-2xl font-bold text-gray-900">
-                {selectedBlog ? 'Edit Blog' : 'Create New Blog'}
-              </h2>
-              <button
-                onClick={resetForm}
-                className="text-gray-500 hover:text-gray-700 transition-colors"
-              >
-                <FaTimes size={24} />
-              </button>
-            </div>
-
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
-                <input
-                  type="text"
-                  name="title"
-                  value={formData.title}
-                  onChange={handleInputChange}
-                  className="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Content</label>
-                <div className="h-64">
-                  <QuillWrapper
-                    value={formData.content}
-                    onChange={(content) => setFormData(prev => ({ ...prev, content }))}
-                    className="h-48 bg-white"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Author</label>
-                <input
-                  type="text"
-                  name="author"
-                  value={formData.author}
-                  onChange={handleInputChange}
-                  className="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Tags (comma-separated)
-                </label>
-                <input
-                  type="text"
-                  name="tags"
-                  value={formData.tags}
-                  onChange={handleInputChange}
-                  className="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="technology, news, tutorial"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Images</label>
-                <div className="space-y-4">
-                  <div className="flex items-center gap-4">
-                    <button
-                      type="button"
-                      onClick={() => fileInputRef.current?.click()}
-                      className="bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-lg flex items-center gap-2 transition duration-200"
-                    >
-                      <FaImage /> Choose Files
-                    </button>
-                    <span className="text-sm text-gray-500">
-                      {formData.images.length} files selected
-                    </span>
-                    <input
-                      ref={fileInputRef}
-                      type="file"
-                      multiple
-                      accept="image/*"
-                      onChange={handleImageUpload}
-                      className="hidden"
-                    />
-                  </div>
-
-                  {/* Image Previews */}
-                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                    {imagePreviewUrls.map((previewData, index) => renderImagePreview(previewData, index))}
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex justify-end gap-3 pt-6 border-t">
-                <button
-                  type="button"
-                  onClick={resetForm}
-                  className="px-6 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition duration-200"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="bg-blue-600 text-white px-6 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-700 transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <FaSpinner className="animate-spin" />
-                      Saving...
-                    </>
-                  ) : (
-                    <>
-                      <FaSave />
-                      Save
-                    </>
-                  )}
-                </button>
-              </div>
-            </form>
+        {/* Blog List */}
+        <div className="bg-white rounded-xl shadow-md overflow-hidden">
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead className="bg-gray-100">
+                <tr>
+                  <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">Title</th>
+                  <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">Author</th>
+                  <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">Created At</th>
+                  <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">Images</th>
+                  <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">Actions</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-200">
+                {blogs.map(blog => (
+                  <tr key={blog._id} className="hover:bg-gray-50">
+                    <td className="px-6 py-4 text-sm text-gray-900">{blog.title}</td>
+                    <td className="px-6 py-4 text-sm text-gray-600">{blog.author}</td>
+                    <td className="px-6 py-4 text-sm text-gray-600">
+                      {new Date(blog.createdAt).toLocaleDateString()}
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="flex -space-x-2">
+                        {blog.image?.slice(0, 3).map((img, index) => (
+                          <div key={index} className="h-8 w-8 rounded-full border-2 border-white overflow-hidden">
+                            <Image
+                              src={`${img}`}
+                              alt={`Blog image ${index + 1}`}
+                              width={32}
+                              height={32}
+                              className="object-cover"
+                            />
+                            {console.log("images -", img)}
+                          </div>
+                        ))}
+                        {blog.image?.length > 3 && (
+                          <div className="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center text-xs text-gray-600 border-2 border-white">
+                            +{blog.image.length - 3}
+                          </div>
+                        )}
+                      </div>
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="flex gap-3">
+                        <button
+                          onClick={() => handleEdit(blog)}
+                          className="text-blue-600 hover:text-blue-800 transition-colors"
+                          title="Edit"
+                        >
+                          <FaEdit size={20} />
+                        </button>
+                        <button
+                          onClick={() => handleDelete(blog._id)}
+                          className="text-red-600 hover:text-red-800 transition-colors"
+                          title="Delete"
+                        >
+                          <FaTrash size={20} />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
-      )}
+
+        {/* Modal Form */}
+        {isModalOpen && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+            <div className="bg-white rounded-xl p-6 w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-2xl font-bold text-gray-900">
+                  {selectedBlog ? 'Edit Blog' : 'Create New Blog'}
+                </h2>
+                <button
+                  onClick={resetForm}
+                  className="text-gray-500 hover:text-gray-700 transition-colors"
+                >
+                  <FaTimes size={24} />
+                </button>
+              </div>
+
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
+                  <input
+                    type="text"
+                    name="title"
+                    value={formData.title}
+                    onChange={handleInputChange}
+                    className="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Content</label>
+                  <div className="h-64">
+                    <QuillWrapper
+                      value={formData.content}
+                      onChange={(content) => setFormData(prev => ({ ...prev, content }))}
+                      className="h-48 bg-white"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Author</label>
+                  <input
+                    type="text"
+                    name="author"
+                    value={formData.author}
+                    onChange={handleInputChange}
+                    className="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Tags (comma-separated)
+                  </label>
+                  <input
+                    type="text"
+                    name="tags"
+                    value={formData.tags}
+                    onChange={handleInputChange}
+                    className="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="technology, news, tutorial"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Images</label>
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-4">
+                      <button
+                        type="button"
+                        onClick={() => fileInputRef.current?.click()}
+                        className="bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-lg flex items-center gap-2 transition duration-200"
+                      >
+                        <FaImage /> Choose Files
+                      </button>
+                      <span className="text-sm text-gray-500">
+                        {formData.images.length} files selected
+                      </span>
+                      <input
+                        ref={fileInputRef}
+                        type="file"
+                        multiple
+                        accept="image/*"
+                        onChange={handleImageUpload}
+                        className="hidden"
+                      />
+                    </div>
+
+                    {/* Image Previews */}
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                      {imagePreviewUrls.map((previewData, index) => renderImagePreview(previewData, index))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex justify-end gap-3 pt-6 border-t">
+                  <button
+                    type="button"
+                    onClick={resetForm}
+                    className="px-6 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition duration-200"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="bg-blue-600 text-white px-6 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-700 transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <FaSpinner className="animate-spin" />
+                        Saving...
+                      </>
+                    ) : (
+                      <>
+                        <FaSave />
+                        Save
+                      </>
+                    )}
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
+      </AdminLayout>
     </div>
   );
 };

@@ -11,7 +11,7 @@ const LoginPage = () => {
     const [loading, setLoading] = useState(false);
     const [formTouched, setFormTouched] = useState(false);
     const router = useRouter();
-    const base_url=process.env.NEXT_PUBLIC_API_BASE_URL
+    const base_url = process.env.NEXT_PUBLIC_API_BASE_URL
 
     useEffect(() => {
         if (localStorage.getItem("adminToken")) {

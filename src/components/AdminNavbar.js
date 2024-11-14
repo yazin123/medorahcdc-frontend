@@ -38,11 +38,8 @@ const AdminNavbar = () => {
 
   return (
     <>
-      <aside className="fixed top-0 left-0 h-full bg-white shadow-lg z-10 w-64">
+      <aside className="fixed top-0 left-0 h-full bg-white shadow-lg z-10 w-64 mt-20">
         {/* Sidebar Header */}
-        <div className="flex items-center justify-between p-4 border-b border-gray-200">
-          <h1 className="font-bold text-xl text-gray-800">Admin Panel</h1>
-        </div>
 
         {/* Navigation Menu */}
         <nav className="p-4">
@@ -59,30 +56,21 @@ const AdminNavbar = () => {
               </span>
             </Link>
           ))}
+
+          <Link href='/'
+            onClick={handleLogout}
+            className={`flex items-center px-4 py-3 mb-1 rounded-lg transition-all duration-200 `}
+            aria-label="Logout"
+          >
+            <RiLogoutBoxLine className="w-5 h-5" />
+            <span className="ml-3">
+              Logout
+            </span>
+          </Link>
+
         </nav>
       </aside>
 
-      {/* Top Navigation Bar */}
-      <header className="fixed top-0 right-0 bg-white shadow-sm z-5 left-64">
-        <div className="flex items-center justify-between px-6 py-4">
-          <div className="flex items-center flex-1">
-            
-          </div>
-
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-3">
-              <p className="text-xs text-gray-500">admin@example.com</p>
-              <button
-                onClick={handleLogout}
-                className="p-2 rounded-lg hover:bg-gray-100 text-gray-600"
-                aria-label="Logout"
-              >
-                <RiLogoutBoxLine className="w-5 h-5" />
-              </button>
-            </div>
-          </div>
-        </div>
-      </header>
     </>
   );
 };

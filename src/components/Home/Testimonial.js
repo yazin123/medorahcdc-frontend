@@ -5,7 +5,6 @@ import Image from 'next/image';
 const Testimonial = () => {
   const [testimonials, setTestimonials] = useState([]);
   const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
-  const base_urlimg = process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE;
 
 
 
@@ -46,7 +45,7 @@ const Testimonial = () => {
               <div className="flex items-center">
                 <div className="relative w-12 h-12 rounded-full overflow-hidden">
                   <Image
-                     src={`${process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE_blog}${testimonial.image}`}
+                     src={`${testimonial.image}`}
                     alt={testimonial.name}
                     fill
                     className="object-cover"

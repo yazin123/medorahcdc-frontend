@@ -1,6 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react';
 import { FaPlus, FaEdit, FaTrash } from 'react-icons/fa';
+import AdminLayout from '../../admin';
 
 const GalleryAdmin = () => {
     const [gallery, setGallery] = useState([]);
@@ -69,6 +70,7 @@ const GalleryAdmin = () => {
     };
 
     return (
+        <AdminLayout>
         <div className="min-h-screen  py-12 px-4 sm:px-6 lg:px-8 mt-20 mb-32 max-w-7xl mx-auto ml-64">
 
             <div className="mb-8 flex justify-between items-center">
@@ -98,7 +100,7 @@ const GalleryAdmin = () => {
                             <tr key={item._id} className="hover:bg-gray-100">
                                 <td className="p-2 border">
                                     <img
-                                        src={`${process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE}/gallery/${item.image}`}
+                                        src={`${item.image}`}
                                         alt={item.title}
                                         className="w-20 h-20 object-cover rounded"
                                         crossOrigin='anonymous'
@@ -276,6 +278,7 @@ const GalleryAdmin = () => {
                 </div>
             )}
         </div>
+        </AdminLayout>
     );
 };
 

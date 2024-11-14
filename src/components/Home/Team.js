@@ -70,7 +70,7 @@ const Team = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <div className="relative h-96 lg:h-auto">
                 <Image
-                   src={`${process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE}/${featuredMember.image}`}
+                   src={`${featuredMember.image}`}
                   alt={featuredMember.name}
                   width={500} height={500}
                   className="transform hover:scale-95 transition-transform duration-300 h-auto  object-cover"
@@ -105,7 +105,7 @@ const Team = () => {
             >
               <div className="relative h-64">
                 <Image
-                  src={`${process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE}/${member.image}`}
+                  src={`${member.image}`}
                   alt={member.name}
                   layout="fill"
                   objectFit="cover"
