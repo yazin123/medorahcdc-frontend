@@ -13,28 +13,28 @@ const poppins = Poppins({
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900']
 });
 export const metadata = {
-  title: 'FLY - Forward Looking Youth',
-  description: "Join FLY NextGen Awards 2024, celebrating young entrepreneurial talent with competitions, expert mentorship, and networking. 200+ emerging business leaders unite for this premier youth recognition platform",
-  keywords: 'FLY NextGen Awards 2024, Young entrepreneurs awards, Youth entrepreneurship, Business leadership awards, NextGen business competition, Entrepreneurship mentorship, Business talent recognition,Youth entrepreneurship competition 2024',
+  title: 'Medorah CDC',
+  description: "Where little minds grow, and big Dreams begin",
+  keywords: 'Child development Centre, Therapy, Speech Therapy, Occupational Therapy, Special Education, Therapy Centre, Specially abled',
   openGraph: {
-    title: 'FLY - Forward Looking Youth',
-    description: 'Join FLY NextGen Awards 2024, celebrating young entrepreneurial talent with competitions, expert mentorship, and networking. 200+ emerging business leaders unite for this premier youth recognition platform',
-    url: 'https://register.flynetwork.in/',
+    title: 'Medorah CDC',
+    description: 'Where little minds grow, and big Dreams begin',
+    url: 'https://medorahcdc.in/',
     images: [
       {
-        url: 'https://register.flynetwork.in/flymeta.jpg',
-        alt: 'FLY - Forward Looking Youth',
+        url: 'https://medorahcdc.in/footer-logo.png',
+        alt: 'Medorah CDC',
       },
     ],
-    siteName: 'FLY - Forward Looking Youth',
+    siteName: 'Medorah CDC',
   },
   icons: {
-    icon: '/flymeta.jpg',
-    shortcut: '/flymeta.jpg',
-    apple: '/img/yazin.jpg',
+    icon: '/footer-logo.png',
+    shortcut: '/footer-logo.png',
+    apple: '/footer-logo.png',
     other: {
       rel: 'apple-touch-icon-precomposed',
-      url: '/flymeta.jpg',
+      url: '/footer-logo.png',
     },
   },
 };
