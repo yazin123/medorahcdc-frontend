@@ -19,10 +19,10 @@ export const metadata = {
   openGraph: {
     title: 'Medorah CDC',
     description: 'Where little minds grow, and big Dreams begin',
-    url: 'https://medorahcdc.in/',
+    url: 'https://medorahcdc.com/',
     images: [
       {
-        url: 'https://medorahcdc.in/footer-logo.png',
+        url: 'https://medorahcdc.com/footer-logo.png',
         alt: 'Medorah CDC',
       },
     ],
