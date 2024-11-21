@@ -19,6 +19,8 @@ const ServiceAdminDashboard = () => {
     description: '',
     howitworks: '',
     whatisService: '',
+    whatToExpect: '',
+    signs: '',
     handledBy: [],
     image: null,
     imageUrl: '',
@@ -62,6 +64,8 @@ const ServiceAdminDashboard = () => {
     if (!service.description?.trim()) return 'Description is required';
     if (!service.howitworks?.trim()) return 'How it works is required';
     if (!service.whatisService?.trim()) return 'What is service is required';
+    if (!service.whatToExpect?.trim()) return 'What to Expect is required';
+    if (!service.signs?.trim()) return 'Signs of Service is required';
     if (!service.handledBy?.length) return 'At least one team must be selected';
     return null;
   };
@@ -105,6 +109,8 @@ const ServiceAdminDashboard = () => {
       formData.append('description', newService.description);
       formData.append('howitworks', newService.howitworks);
       formData.append('whatisService', newService.whatisService);
+      formData.append('whatToExpect', newService.whatToExpect);
+      formData.append('signs', newService.signs);
       newService.handledBy.forEach(teamId => {
         formData.append('handledBy', teamId);
       });
@@ -189,6 +195,18 @@ const ServiceAdminDashboard = () => {
             className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={newService.whatisService}
             onChange={(e) => setNewService({ ...newService, whatisService: e.target.value })}
+          />
+                    <textarea
+            placeholder="What to Expect from.."
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            value={newService.whatToExpect}
+            onChange={(e) => setNewService({ ...newService, whatToExpect: e.target.value })}
+          />
+                    <textarea
+            placeholder="Signs of service.."
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            value={newService.signs}
+            onChange={(e) => setNewService({ ...newService, signs: e.target.value })}
           />
           <div className="flex flex-wrap gap-2">
             {teams.map((team) => (

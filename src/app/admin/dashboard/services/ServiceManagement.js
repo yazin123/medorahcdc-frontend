@@ -41,6 +41,8 @@ const ServiceManagement = ({ service, onUpdate, onDelete, teams }) => {
       formData.append('description', editedService.description);
       formData.append('howitworks', editedService.howitworks);
       formData.append('whatisService', editedService.whatisService);
+      formData.append('whatToExpect', editedService.whatToExpect);
+      formData.append('signs', editedService.signs);
       formData.append('handledBy', JSON.stringify(editedService.handledBy));
 
       if (editedService.image) {
@@ -177,6 +179,18 @@ const ServiceManagement = ({ service, onUpdate, onDelete, teams }) => {
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="What is the Service"
             />
+            <textarea
+              value={editedService.whatToExpect}
+              onChange={(e) => setEditedService({ ...editedService, whatToExpect: e.target.value })}
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="What to expect"
+            />
+                        <textarea
+              value={editedService.signs}
+              onChange={(e) => setEditedService({ ...editedService, signs: e.target.value })}
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Signs of requirement"
+            />
             <div className="flex flex-wrap gap-2">
               {teams.map((team) => (
                 <button
@@ -187,11 +201,10 @@ const ServiceManagement = ({ service, onUpdate, onDelete, teams }) => {
                       : [...editedService.handledBy, team._id];
                     setEditedService({ ...editedService, handledBy: updatedTeams });
                   }}
-                  className={`px-4 py-2 rounded-lg transition-colors ${
-                    editedService.handledBy.includes(team._id)
+                  className={`px-4 py-2 rounded-lg transition-colors ${editedService.handledBy.includes(team._id)
                       ? 'bg-blue-500 text-white'
                       : 'bg-gray-100 hover:bg-gray-200'
-                  }`}
+                    }`}
                 >
                   {team.name}
                 </button>

@@ -5,7 +5,7 @@ import ContactSection from '@/components/Home/Contact';
 import Hero from '@/components/Home/Hero'
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
-import { FaCheckCircle } from 'react-icons/fa';
+import { FaArrowCircleRight, FaCheckCircle } from 'react-icons/fa';
 
 
 const HowItWorks = ({ title, steps }) => {
@@ -65,6 +65,53 @@ const ServiceDetailSection = ({ service }) => {
             >
                 Book your Appointment Now
             </button>
+        </section>
+    );
+};
+const WhatToExpect = ({ service }) => {
+    return (
+        <section className="max-w-7xl mx-auto px-4 py-16 text-center mt-24" data-aos='fade-up'>
+            <h1 className="text-4xl font-bold mb-6 text-gray-900">
+                What to expect from your first appointment on {service.title}
+            </h1>
+
+            <p className="text-gray-600 mb-8 leading-relaxed mx-auto max-w-7xl">
+                {service.whatToExpect}
+            </p>
+
+
+        </section>
+    );
+};
+
+const SignsOf = ({ service }) => {
+
+    const stepsArray = service?.split('//').map((step, index) => ({
+        number: index + 1,
+        title: step.trim(),
+        description: "",  // Empty description since it's not in the data
+        icon: FaCheckCircle
+    }));
+    return (
+        <section className="max-w-7xl mx-auto px-4 py-16 text-center mt-24" data-aos='fade-up'>
+            <h1 className="text-4xl font-bold mb-6 text-gray-900">
+                Signs your child may need {service?.title}?
+            </h1>
+
+            <p className="text-gray-600 mb-8 leading-relaxed mx-auto max-w-3xl">
+                {stepsArray?.map((step) => (
+                    <div key={step.number} className="flex items-start gap-4 hover:bg-white p-4 rounded-2xl transition">
+                        <div className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full  font-semibold">
+                            <FaArrowCircleRight/>
+                        </div>
+                        <div className="flex-grow text-left">
+                            <p className="font-semibold text-left mb-1">{step.title}</p>
+                        </div>
+                    </div>
+                ))}
+            </p>
+
+
         </section>
     );
 };
@@ -160,6 +207,9 @@ const Page = () => {
                 steps={service.howitworks}
             />
             <ServiceDetailSection service={service} />
+
+            <WhatToExpect service={service} />
+            <SignsOf service={service.signs} />
 
             {articles.length > 0 ? (<> <h1 className="text-4xl font-bold mb-8 text-center mt-16">Related Articles</h1> <BlogGrid articles={articles} /> </>) : ''}
             <ContactSection />
