@@ -58,24 +58,24 @@ const ServiceDetailSection = ({ service }) => {
                 {service.whatisService}
             </p>
 
-            <button
+            <a href='/#contact'
                 className="bg-navy-700 hover:bg-navy-800 text-white font-medium py-3 px-8 rounded-full transition-colors duration-200"
                 style={{ backgroundColor: '#1B365D' }}
                 onClick={() => console.log('Booking appointment...')}
             >
                 Book your Appointment Now
-            </button>
+            </a>
         </section>
     );
 };
 const WhatToExpect = ({ service }) => {
     return (
-        <section className="max-w-7xl mx-auto px-4 py-16 text-center mt-24" data-aos='fade-up'>
+        <section className="max-w-7xl mx-auto px-4 py-16 text-left mt-24" data-aos='fade-up'>
             <h1 className="text-4xl font-bold mb-6 text-gray-900">
                 What to expect from your first appointment on {service.title}
             </h1>
 
-            <p className="text-gray-600 mb-8 leading-relaxed mx-auto max-w-7xl">
+            <p className="text-gray-600 mb-8 leading-relaxed mx-auto max-w-7xl text-justify">
                 {service.whatToExpect}
             </p>
 
@@ -105,7 +105,7 @@ const SignsOf = ({ service }) => {
                             <FaArrowCircleRight/>
                         </div>
                         <div className="flex-grow text-left">
-                            <p className="font-semibold text-left mb-1">{step.title}</p>
+                            <p className="font-semibold text-left text-lg mb-1">{step.title}</p>
                         </div>
                     </div>
                 ))}
