@@ -100,7 +100,7 @@ const Services = () => {
               <div className="bg-white  overflow-hidden ">
                 <div className="aspect-w-16 aspect-h-9 mb-4">
                   <Image
-                    src={`${service.imageUrl}`}
+                    src={`${process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE_blog}${service.imageUrl}`}
                     alt={service.title}
                     width={500}
                     height={500}

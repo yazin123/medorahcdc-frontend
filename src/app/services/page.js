@@ -54,7 +54,7 @@ const Services = () => {
                         <Link className="bg-white overflow-hidden " href={`/services/${slugify(service.title)}`} >
                             <div className="aspect-w-16 aspect-h-9 transition duration-300 hover:scale-105">
                                 <Image
-                                    src={`${service.imageUrl}`}
+                                    src={`${process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE_blog}${service.imageUrl}`}
                                     alt={service.title}
                                     width={500}
                                     height={500}

@@ -17,7 +17,7 @@ const BlogGrid = ({ articles }) => {
           >
             <div className="aspect-[4/3] relative">
               <Image
-                src={`${article.image[0]}`}
+                src={`${process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE_blog}${article.image[0]}`}
                 alt={article.title}
                 width={800}
                 height={800}

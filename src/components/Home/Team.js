@@ -70,17 +70,17 @@ const Team = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <div className="relative h-96 lg:h-auto">
                 <Image
-                   src={`${featuredMember.image}`}
+                   src={`${process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE_blog}${featuredMember.image}`}
                   alt={featuredMember.name}
-                  width={500} height={500}
-                  className="transform hover:scale-95 transition-transform duration-300 h-auto  object-cover"
+                  width={5000} height={5000}
+                  className="transform hover:scale-110 transition-transform duration-300 h-full w-full  object-cover"
                 />
               </div>
               <div className="p-8 flex flex-col justify-center">
                 <h2 className="text-3xl font-bold text-gray-900 mb-4">
                   {featuredMember.name}
                 </h2>
-                <p className="text-xl text-gray-600 mb-4">
+                <p className="text-md text-yellow-500 mb-4 italic ">
                   {featuredMember.position}
                 </p>
                 <p className="text-gray-600 leading-relaxed">
@@ -103,13 +103,13 @@ const Team = () => {
               whileHover={{ y: -8 }}
               className="bg-white rounded-xl shadow-md overflow-hidden transition-shadow duration-300 hover:shadow-xl w-full sm:w-96"
             >
-              <div className="relative h-64">
+              <div className="relative h-72">
                 <Image
-                  src={`${member.image}`}
+                  src={`${process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE_blog}${member.image}`}
                   alt={member.name}
-                  layout="fill"
-                  objectFit="cover"
-                  className="transform hover:scale-105 transition-transform duration-300"
+                  width={500}
+                  height={500}
+                  className="transform hover:scale-105 object-cover  h-full w-full transition-transform duration-300"
                   crossOrigin="anonymous"
                 />
               </div>

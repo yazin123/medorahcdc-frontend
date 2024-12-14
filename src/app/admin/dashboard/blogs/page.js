@@ -83,7 +83,7 @@ const QuillWrapper = dynamic(
   },
   {
     ssr: false,
-    loading: () => <p>Loading editor...</p>,
+    loading: () => <div>Loading editor...</div>,
   }
 );
 
@@ -216,7 +216,7 @@ const BlogManagement = () => {
       <div key={index} className="relative group">
         <div className="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden">
           <Image
-            src={imageUrl}
+            src={`${process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE_blog}${imageUrl}`}
             alt={`Preview ${index + 1}`}
             width={200}
             height={150}
@@ -401,7 +401,7 @@ const BlogManagement = () => {
                         {blog.image?.slice(0, 3).map((img, index) => (
                           <div key={index} className="h-8 w-8 rounded-full border-2 border-white overflow-hidden">
                             <Image
-                              src={`${img}`}
+                              src={`${process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE_blog}${img}`}
                               alt={`Blog image ${index + 1}`}
                               width={32}
                               height={32}
@@ -533,9 +533,9 @@ const BlogManagement = () => {
                     </div>
 
                     {/* Image Previews */}
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                    {/* <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                       {imagePreviewUrls.map((previewData, index) => renderImagePreview(previewData, index))}
-                    </div>
+                    </div> */}
                   </div>
                 </div>
 

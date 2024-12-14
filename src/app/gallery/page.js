@@ -34,7 +34,7 @@ const GalleryPage = () => {
           <div key={index} className="group cursor-pointer" onClick={() => setSelectedImage(image)}>
             <div className="relative overflow-hidden rounded-lg">
               <img
-                src={image.image}
+                src={`${process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE_blog}${image.image}`}
                 alt={image.title}
                 className="w-full h-64 object-cover transform transition-transform duration-300 group-hover:scale-105"
               />
@@ -70,7 +70,7 @@ const GalleryPage = () => {
           >
             <div className="relative">
               <img
-                src={selectedImage.image}
+                src={`${process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE_blog}${selectedImage.image}`}
                 alt={selectedImage.title}
                 className="w-full h-auto"
               />

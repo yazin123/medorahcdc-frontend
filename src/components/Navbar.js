@@ -32,8 +32,8 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-20 items-center">
           <div className="flex items-center">
-            <Image width={100} height={100} src="/logo.png" alt="Logo" className="w-20 h-auto hidden md:block" />
-            <Image width={100} height={100} src="/logo.png" alt="Logo" className="w-20 h-auto md:hidden" />
+            <Image width={700} height={700} src="/image.png" alt="Logo" className="w-auto h-20 hidden md:block" />
+            <Image width={700} height={700} src="/image.png" alt="Logo" className="w-auto h-14 md:hidden" />
           </div>
 
           {/* Desktop Menu */}

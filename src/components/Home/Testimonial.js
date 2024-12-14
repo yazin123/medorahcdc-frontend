@@ -26,6 +26,8 @@ const Testimonial = () => {
 
 
   return (
+   <>
+   {testimonials.length >0?<>
     <div className="max-w-7xl mx-auto px-4 py-16">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-4xl font-bold text-center mb-12">What They Have to Say</h2>
@@ -45,7 +47,7 @@ const Testimonial = () => {
               <div className="flex items-center">
                 <div className="relative w-12 h-12 rounded-full overflow-hidden">
                   <Image
-                     src={`${testimonial.image}`}
+                     src={`${process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE_blog}${testimonial.image}`}
                     alt={testimonial.name}
                     fill
                     className="object-cover"
@@ -67,6 +69,8 @@ const Testimonial = () => {
         </div>
       </div>
     </div>
+   </>:''}
+   </>
   );
 };
 

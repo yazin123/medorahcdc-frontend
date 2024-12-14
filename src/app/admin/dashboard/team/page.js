@@ -319,7 +319,7 @@ const TeamManagement = () => {
                             {member.image && (
                                 <div className="relative h-48">
                                     <img
-                                        src={`${member.image}`}
+                                        src={`${process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE_blog}${member.image}`}
                                         alt={member.name}
                                         className="w-full h-full object-cover"
                                         crossOrigin="anonymous"

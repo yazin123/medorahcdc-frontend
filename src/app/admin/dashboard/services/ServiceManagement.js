@@ -109,7 +109,7 @@ const ServiceManagement = ({ service, onUpdate, onDelete, teams }) => {
           {service.imageUrl && (
             <div className="relative w-full h-48">
               <Image
-                src={`${service.imageUrl}`}
+                src={`${process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE_blog}${service.imageUrl}`}
                 alt={service.title}
                 fill
                 className="object-cover"
@@ -223,7 +223,7 @@ const ServiceManagement = ({ service, onUpdate, onDelete, teams }) => {
               {(imagePreview || editedService.imageUrl) && (
                 <div className="mt-2 relative w-full h-48">
                   <Image
-                    src={imagePreview || `${base_url}${editedService.imageUrl}`}
+                    src={imagePreview || `${process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE_blog}${editedService.imageUrl}`}
                     alt="Preview"
                     fill
                     className="object-cover rounded-lg"

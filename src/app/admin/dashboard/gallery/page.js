@@ -100,7 +100,7 @@ const GalleryAdmin = () => {
                             <tr key={item._id} className="hover:bg-gray-100">
                                 <td className="p-2 border">
                                     <img
-                                        src={`${item.image}`}
+                                        src={`${process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE_blog}${item.image}`}
                                         alt={item.title}
                                         className="w-20 h-20 object-cover rounded"
                                         crossOrigin='anonymous'
@@ -182,7 +182,7 @@ const GalleryAdmin = () => {
                                                         </label>
                                                         {selectedItem && (
                                                             <img
-                                                                src={`${process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE}/${selectedItem.image}`}
+                                                                src={`${process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE_blog}${selectedItem.image}`}
                                                                 alt="Current"
                                                                 className="w-32 h-32 object-cover mb-2 rounded"
                                                             />
