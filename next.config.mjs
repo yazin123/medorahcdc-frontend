@@ -1,7 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images:{
-        domains:['localhost','res.cloudinary.com','maps.googleapis.com', 'medorahcdc.com']
+         remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'medorahcdc.com',
+      },
+      {
+        protocol: 'https',
+        hostname: '43.204.221.149',
+      },
+    ],
 }
 };
 export default nextConfig;
