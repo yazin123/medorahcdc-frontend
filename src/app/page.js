@@ -97,8 +97,8 @@ const HomePage = () => {
       <Faq />
       <Team />
       <Testimonial />
-      <h1 className="text-4xl font-bold mb-8 text-center mt-16">Articles</h1>
-      {articles.length > 0 ? (<><BlogGrid articles={articles} /> </>) : ''}
+    
+      {articles.length > 0 ? (<>   <h1 className="text-4xl font-bold mb-8 text-center mt-16">Articles</h1> <BlogGrid articles={articles} /> </>) : ''}
       <ContactSection />
     </div>
   );
