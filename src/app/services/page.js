@@ -8,6 +8,7 @@ import React, { useState, useEffect } from 'react';
 
 const Services = () => {
     const [services, setServices] = useState([]);
+    const [articles, setBlogs] = useState([]);
     const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
     const base_urlimg = process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE;
     const slugify = (text) => {
@@ -20,6 +21,7 @@ const Services = () => {
 
     useEffect(() => {
         fetchServices();
+         fetchBlogs();
     }, []);
 
     const fetchServices = async () => {
@@ -33,6 +35,18 @@ const Services = () => {
             console.log('Error loading services. Please try again later.');
         }
     };
+
+      const fetchBlogs = async () => {
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}blogs`);
+      const data = await response.json();
+      setBlogs(Array.isArray(data) ? data : []);
+      setLoading(false);
+    } catch (err) {
+
+      console.log("error fetching blogs", err)
+    }
+  };
 
 
     return (
@@ -87,8 +101,8 @@ const page = () => {
             />
             <Services />
             <Howweworks />
-            <h1 className="text-4xl font-bold mb-8 text-center mt-16">Articles</h1>
-            <BlogGrid />
+           
+           {articles.length > 0 ? (<>  <h1 className="text-4xl font-bold mb-8 text-center mt-16">Articles</h1> <BlogGrid articles={articles} /> </>) : ''}
         </div>
     )
 }
