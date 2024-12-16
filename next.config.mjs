@@ -10,6 +10,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: '43.204.221.149',
       },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+      },
     ],
 }
 };

@@ -101,8 +101,9 @@ const page = () => {
             />
             <Services />
             <Howweworks />
-           
-           {articles.length > 0 ? (<>  <h1 className="text-4xl font-bold mb-8 text-center mt-16">Articles</h1> <BlogGrid articles={articles} /> </>) : ''}
+{/*            
+          <h1 className="text-4xl font-bold mb-8 text-center mt-16">Articles</h1> \
+          <BlogGrid articles={articles} />  */}
         </div>
     )
 }
