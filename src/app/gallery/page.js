@@ -57,6 +57,9 @@ const GalleryPage = () => {
           </div>
         ))}
       </div>
+        <div className="flex justify-center w-full">
+      <a href="https://www.instagram.com/medorah.cdc/" className="bg-black text-white rounded-full px-4 py-2">View More</a>
+          </div>
 
       {/* Modal */}
       {selectedImage && (
