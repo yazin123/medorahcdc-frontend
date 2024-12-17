@@ -45,7 +45,7 @@ const Navbar = () => {
             <Link href="/gallery" className="text-gray-600 hover:text-teal-600">Gallery</Link>
             <Link href="/blogs" className="text-gray-600 hover:text-teal-600">Blogs</Link>
             <Link
-              href='https://wa.me/+917994857990'
+              href='https://wa.me/+918848607827'
               className="bg-teal-600 text-white px-4 py-2 rounded-md hover:bg-teal-700">
               Book Now
             </Link>
@@ -74,7 +74,7 @@ const Navbar = () => {
             <Link href="/gallery" className="block px-3 py-2 text-gray-600 hover:text-teal-600">Gallery</Link>
             <Link href="/blogs" className="block px-3 py-2  text-gray-600 hover:text-teal-600">Blogs</Link>
             <Link
-              href='tel:+917994857990'
+              href='tel:+918848607827'
               className="w-full text-left  px-3 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700">
               Book Now
             </Link>
