@@ -2,8 +2,6 @@
 const nextConfig = {
     images:{
        domains:['medorahcdc.com', 'localhost']
-
-    ],
 }
 };
 export default nextConfig;
