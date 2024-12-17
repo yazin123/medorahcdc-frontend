@@ -22,9 +22,9 @@ const Features = () => {
                             </div>
                         </div>
 
-                        <button className="mt-4 px-4 py-2 bg-white rounded-full text-sm hover:bg-gray-50 transition-colors">
+                         {/* <button className="mt-4 px-4 py-2 bg-white rounded-full text-sm hover:bg-gray-50 transition-colors">
                             Read More
-                        </button>
+                        </button> */}
                     </div>
                     {/* card */}
                     <div data-aos="fade-up" data-aos-delay="100">
@@ -32,9 +32,9 @@ const Features = () => {
                         <div className={`p-8 rounded-3xl  bg-[#7AC38B]/50`}>
                             <h2 className="text-xl font-semibold mb-4">Growth-Focused Approach</h2>
                             <p className={` mb-4 text-sm`}> Implement evidence-based strategies to inspire active learning and growth</p>
-                            <button className="mt-4 px-4 py-2 bg-white rounded-full text-sm hover:bg-gray-50 transition-colors">
+                            {/*  <button className="mt-4 px-4 py-2 bg-white rounded-full text-sm hover:bg-gray-50 transition-colors">
                                 Read More
-                            </button>
+                            </button>*/}
                         </div>
                     </div>
                     {/* card */}
@@ -49,9 +49,9 @@ const Features = () => {
                             </div>
                         </div>
 
-                        <button className="mt-4 px-4 py-2 bg-white rounded-full text-sm hover:bg-gray-50 transition-colors">
+                       {/*   <button className="mt-4 px-4 py-2 bg-white rounded-full text-sm hover:bg-gray-50 transition-colors">
                             Read More
-                        </button>
+                        </button>*/}
                     </div>
 
                 </div>
