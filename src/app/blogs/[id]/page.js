@@ -95,7 +95,7 @@ const BlogPost = ({ params }) => {
             {/* Content Section */}
             <div className=" max-w-4xl mx-auto px-4 py-8 mt-16 space-y-6">
                 <div 
-                    className="prose max-w-none prose-lg prose-gray"
+                    className="prose max-w-none prose-lg prose-gray myblog"
                     dangerouslySetInnerHTML={{ __html: blog.content }}
                 />
 
