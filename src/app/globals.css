@@ -17,3 +17,7 @@ html, body {
         background: #ffffff !important;
     }
 }
+
+.myblog ol {
+  list-style-type: decimal; /* Ensure numbers are shown */
+}
