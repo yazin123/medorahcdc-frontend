@@ -50,7 +50,7 @@ const Services = () => {
 
 
     return (
-        <div className="max-w-7xl mx-auto px-4 py-16 mt-96 md:mt-0 ">
+        <div className="max-w-7xl mx-auto px-4 py-16 mt-[80vh] md:mt-0  ">
             <div className="mb-12">
                 <h1 className="text-3xl md:text-4xl font-bold mb-3" data-aos="fade-right">
                     Services
