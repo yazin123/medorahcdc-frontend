@@ -92,10 +92,16 @@ const SignsOf = ({ service }) => {
         description: "",  // Empty description since it's not in the data
         icon: FaCheckCircle
     }));
+
+      const convertToTherapist = (title) => {
+        // If the title contains 'therapy', replace it with 'therapist'
+        return title.replace(/\btherapy\b/i, 'therapist');
+    };
+
     return (
         <section className="max-w-7xl mx-auto px-4 py-16 text-center mt-24" data-aos='fade-up'>
             <h1 className="text-4xl font-bold mb-6 text-gray-900">
-                Signs your child may need {service?.title}?
+                Signs your child may need to see a  {convertToTherapist(service?.title)}
             </h1>
 
             <p className="text-gray-600 mb-8 leading-relaxed mx-auto max-w-3xl">
