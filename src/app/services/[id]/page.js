@@ -86,7 +86,7 @@ const WhatToExpect = ({ service }) => {
 
 const SignsOf = ({ service }) => {
 
-    const stepsArray = service?.split('//').map((step, index) => ({
+    const stepsArray = service.signs?.split('//').map((step, index) => ({
         number: index + 1,
         title: step.trim(),
         description: "",  // Empty description since it's not in the data
@@ -209,7 +209,7 @@ const Page = () => {
             <ServiceDetailSection service={service} />
 
             <WhatToExpect service={service} />
-            <SignsOf service={service.signs} />
+            <SignsOf service={service} />
 
             {articles.length > 0 ? (<> <h1 className="text-4xl font-bold mb-8 text-center mt-16">Related Articles</h1> <BlogGrid articles={articles} /> </>) : ''}
             <ContactSection />
