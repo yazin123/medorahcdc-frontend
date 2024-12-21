@@ -4,7 +4,18 @@ import Image from 'next/image';
 
 const ServiceManagement = ({ service, onUpdate, onDelete, teams }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [editedService, setEditedService] = useState(service);
+  const [editedService, setEditedService] = useState({
+    title: service.title || '',
+    description: service.description || '',
+    howitworks: service.howitworks || '',
+    whatisService: service.whatisService || '',
+    whatToExpect: service.whatToExpect || '',
+    signs: service.signs || '',
+    whoAttends: service.whoAttends || '',
+    handledBy: service.handledBy || [],
+    imageUrl: service.imageUrl || '',
+    image: null
+  });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [imagePreview, setImagePreview] = useState(null);
@@ -12,7 +23,18 @@ const ServiceManagement = ({ service, onUpdate, onDelete, teams }) => {
   const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
 
   useEffect(() => {
-    setEditedService(service);
+    setEditedService({
+      title: service.title || '',
+      description: service.description || '',
+      howitworks: service.howitworks || '',
+      whatisService: service.whatisService || '',
+      whatToExpect: service.whatToExpect || '',
+      signs: service.signs || '',
+      whoAttends: service.whoAttends || '',
+      handledBy: service.handledBy || [],
+      imageUrl: service.imageUrl || '',
+      image: null
+    });
   }, [service]);
 
   const handleImageChange = (e) => {
@@ -32,7 +54,6 @@ const ServiceManagement = ({ service, onUpdate, onDelete, teams }) => {
 
   const handleUpdate = async () => {
     try {
-      console.log("updatinggg")
       setLoading(true);
       setError('');
 
@@ -44,8 +65,7 @@ const ServiceManagement = ({ service, onUpdate, onDelete, teams }) => {
       formData.append('whatToExpect', editedService.whatToExpect);
       formData.append('signs', editedService.signs);
       formData.append('handledBy', JSON.stringify(editedService.handledBy));
-      formData.append('whoAttends', JSON.stringify(editedService.whoAttends));
-      
+      formData.append('whoAttends', editedService.whoAttends);
 
       if (editedService.image) {
         formData.append('image', editedService.image);
@@ -120,7 +140,8 @@ const ServiceManagement = ({ service, onUpdate, onDelete, teams }) => {
             </div>
           )}
           <div className="p-6">
-            <h3 className="text-lg font-bold mb-2">{service.title} </h3>
+            <h3 className="text-lg font-bold mb-2">{service.title}</h3>
+            <h3 className="text-lg font-bold mb-2"> Who attends: {service.whoAttends}</h3>
             <p className="text-gray-600 mb-2">{service.description}</p>
             <p className="text-gray-600 mb-2">
               <strong>How it Works:</strong> {service.howitworks}
@@ -163,14 +184,13 @@ const ServiceManagement = ({ service, onUpdate, onDelete, teams }) => {
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Title"
             />
-                <input
+            <input
               type="text"
               value={editedService.whoAttends}
               onChange={(e) => setEditedService({ ...editedService, whoAttends: e.target.value })}
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="whoAttends eg: a Speach Therapist"
+              placeholder="whoAttends eg: a Speech Therapist"
             />
-                
             <textarea
               value={editedService.description}
               onChange={(e) => setEditedService({ ...editedService, description: e.target.value })}
@@ -195,7 +215,7 @@ const ServiceManagement = ({ service, onUpdate, onDelete, teams }) => {
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="What to expect"
             />
-                        <textarea
+            <textarea
               value={editedService.signs}
               onChange={(e) => setEditedService({ ...editedService, signs: e.target.value })}
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -211,10 +231,11 @@ const ServiceManagement = ({ service, onUpdate, onDelete, teams }) => {
                       : [...editedService.handledBy, team._id];
                     setEditedService({ ...editedService, handledBy: updatedTeams });
                   }}
-                  className={`px-4 py-2 rounded-lg transition-colors ${editedService.handledBy.includes(team._id)
+                  className={`px-4 py-2 rounded-lg transition-colors ${
+                    editedService.handledBy.includes(team._id)
                       ? 'bg-blue-500 text-white'
                       : 'bg-gray-100 hover:bg-gray-200'
-                    }`}
+                  }`}
                 >
                   {team.name}
                 </button>
@@ -252,7 +273,18 @@ const ServiceManagement = ({ service, onUpdate, onDelete, teams }) => {
               </button>
               <button
                 onClick={() => {
-                  setEditedService(service);
+                  setEditedService({
+                    title: service.title || '',
+                    description: service.description || '',
+                    howitworks: service.howitworks || '',
+                    whatisService: service.whatisService || '',
+                    whatToExpect: service.whatToExpect || '',
+                    signs: service.signs || '',
+                    whoAttends: service.whoAttends || '',
+                    handledBy: service.handledBy || [],
+                    imageUrl: service.imageUrl || '',
+                    image: null
+                  });
                   setImagePreview(null);
                   setIsEditing(false);
                 }}
