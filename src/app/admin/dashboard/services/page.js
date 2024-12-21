@@ -21,6 +21,7 @@ const ServiceAdminDashboard = () => {
     whatisService: '',
     whatToExpect: '',
     signs: '',
+    whoAttends:'',
     handledBy: [],
     image: null,
     imageUrl: '',
@@ -64,9 +65,11 @@ const ServiceAdminDashboard = () => {
     if (!service.description?.trim()) return 'Description is required';
     if (!service.howitworks?.trim()) return 'How it works is required';
     if (!service.whatisService?.trim()) return 'What is service is required';
+    if (!service.whoAttends?.trim()) return 'whoAttends is required';
     if (!service.whatToExpect?.trim()) return 'What to Expect is required';
     if (!service.signs?.trim()) return 'Signs of Service is required';
     if (!service.handledBy?.length) return 'At least one team must be selected';
+    
     return null;
   };
   const handleImageChange = (e, isEditing = false) => {
@@ -109,8 +112,10 @@ const ServiceAdminDashboard = () => {
       formData.append('description', newService.description);
       formData.append('howitworks', newService.howitworks);
       formData.append('whatisService', newService.whatisService);
+      formData.append('whoAttends', newService.whoAttends);
       formData.append('whatToExpect', newService.whatToExpect);
       formData.append('signs', newService.signs);
+      
       newService.handledBy.forEach(teamId => {
         formData.append('handledBy', teamId);
       });
@@ -177,6 +182,13 @@ const ServiceAdminDashboard = () => {
             className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={newService.title}
             onChange={(e) => setNewService({ ...newService, title: e.target.value })}
+          />
+              <input
+            type="text"
+            placeholder="whoAttends eg: a Speach Therapist"
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            value={newService.whoAttends}
+            onChange={(e) => setNewService({ ...newService, whoAttends: e.target.value })}
           />
           <textarea
             placeholder="Description"
