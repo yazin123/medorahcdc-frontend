@@ -101,7 +101,7 @@ const SignsOf = ({ service }) => {
     return (
         <section className="max-w-7xl mx-auto px-4 py-16 text-center mt-24" data-aos='fade-up'>
             <h1 className="text-4xl font-bold mb-6 text-gray-900">
-                Signs your child may need to see a  {convertToTherapist(service?.title)}
+                Signs your child may need to see a  {service.whoAttends? service.whoAttends : ''}
             </h1>
 
             <p className="text-gray-600 mb-8 leading-relaxed mx-auto max-w-3xl">
