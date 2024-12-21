@@ -44,6 +44,8 @@ const ServiceManagement = ({ service, onUpdate, onDelete, teams }) => {
       formData.append('whatToExpect', editedService.whatToExpect);
       formData.append('signs', editedService.signs);
       formData.append('handledBy', JSON.stringify(editedService.handledBy));
+      formData.append('whoAttends', JSON.stringify(editedService.whoAttends));
+      
 
       if (editedService.image) {
         formData.append('image', editedService.image);
@@ -161,6 +163,14 @@ const ServiceManagement = ({ service, onUpdate, onDelete, teams }) => {
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Title"
             />
+                <input
+              type="text"
+              value={editedService.whoAttends}
+              onChange={(e) => setEditedService({ ...editedService, whoAttends: e.target.value })}
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="whoAttends eg: a Speach Therapist"
+            />
+                
             <textarea
               value={editedService.description}
               onChange={(e) => setEditedService({ ...editedService, description: e.target.value })}
