@@ -26,11 +26,30 @@ const ContactSection = () => {
         }
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        
+const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = {
+        firstName: e.target.elements[0].value,
+        lastName: e.target.elements[1].value,
+        email: e.target.elements[2].value,
+        phone: e.target.elements[3].value,
+        message: e.target.elements[4].value
     };
 
+    try {
+        const response = await fetch(`${base_url}contacts/send-email`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
+        });
+        
+        if (!response.ok) throw new Error('Failed to send message');
+        alert('Message sent successfully!');
+        e.target.reset();
+    } catch (error) {
+        alert('Failed to send message. Please try again.');
+    }
+};
     const renderSocialLink = (platform, icon) => {
         if (!contacts[platform]) return null;
         return (
