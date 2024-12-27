@@ -5,6 +5,7 @@ import { Poppins } from 'next/font/google';
 import Footer from "@/components/Footer";
 import React from 'react';
 import Script from 'next/script';  // Add this import
+import ContactButtons from "@/components/ContactButtons";
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -60,6 +61,7 @@ export default function RootLayout({ children }) {
       <ClientComponent />
       <body className={`${poppins.variable} font-poppins`}>
         <Navbar />
+        <ContactButtons/>
         {children}
         <Footer />
       </body>
