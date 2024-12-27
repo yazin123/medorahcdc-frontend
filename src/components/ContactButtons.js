@@ -1,7 +1,7 @@
 import React from 'react';
 import { Phone, MessageCircle } from 'lucide-react';
 
-const ContactButtons = ({ phoneNumber = '+1234567890' }) => {
+const ContactButtons = ({ phoneNumber = '+918848607827' }) => {
   const handleCall = () => {
     window.location.href = `tel:${phoneNumber}`;
   };
