@@ -103,7 +103,7 @@ const handleSubmit = async (e) => {
 
                         <div className="flex items-center gap-4">
                             <HiLocationMarker className="text-2xl text-blue-800 hidden md:block" />
-                            <span>{contacts.address || "132 Dartmouth Street Boston, Massachusetts 02156 United States"}</span>
+                            <span>{contacts.address}</span>
                         </div>
                     </div>
 
