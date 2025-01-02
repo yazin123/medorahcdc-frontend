@@ -17,7 +17,7 @@ const poppins = Poppins({
 export const metadata = {
   title: 'Medorah CDC',
   description: "Where little minds grow, and big Dreams begin",
-  keywords: 'Child development Centre, Therapy, Speech Therapy, Occupational Therapy, Special Education, Therapy Centre, Specially abled',
+  keywords: 'Medorah CDC, Medorah, Child development Centre, Therapy, Speech Therapy, Occupational Therapy, Special Education, Therapy Centre, Specially abled',
   openGraph: {
     title: 'Medorah CDC',
     description: 'Where little minds grow, and big Dreams begin',
@@ -31,9 +31,9 @@ export const metadata = {
     siteName: 'Medorah CDC',
   },
   icons: {
-    icon: '/footer-logo.png',
-    shortcut: '/footer-logo.png',
-    apple: '/footer-logo.png',
+    icon: 'https://medorahcdc.com/footer-logo.png',
+    shortcut: 'https://medorahcdc.com/footer-logo.png',
+    apple: 'https://medorahcdc.com/footer-logo.png',
     other: {
       rel: 'apple-touch-icon-precomposed',
       url: '/footer-logo.png',
