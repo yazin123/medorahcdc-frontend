@@ -1,4 +1,5 @@
 'use client'
+import Image from 'next/image';
 import React, { useState, useRef, useEffect } from 'react';
 import { IoIosArrowDown } from 'react-icons/io';
 
@@ -81,25 +82,17 @@ const Faq = () => {
                         </span>
                     </h2>
 
-                    <div
+                    <Image
+                        src="/office.jpg"
+                        alt="office"
+                        width={500}
+                        height={500}
                         className="aspect-video bg-gray-100 rounded-lg overflow-hidden relative cursor-pointer transform transition-all duration-500 hover:scale-[1.02]"
                         onMouseEnter={() => setIsHovering(true)}
                         onMouseLeave={() => setIsHovering(false)}
-                    >
-                        <div className="absolute inset-0 flex items-center justify-center">
-                            <div
-                                className={`w-16 h-16 bg-white rounded-full flex items-center justify-center transform transition-all duration-500 ${
-                                    isHovering ? 'scale-110 bg-indigo-50' : ''
-                                }`}
-                            >
-                                <div
-                                    className={`w-0 h-0 border-t-8 border-b-8 border-l-12 border-transparent border-l-indigo-600 ml-1 transform transition-all duration-500 ${
-                                        isHovering ? 'scale-110' : ''
-                                    }`}
-                                />
-                            </div>
-                        </div>
-                    </div>
+                    />
+                    
+                    
                 </div>
 
                 <div className="bg-gradient-to-b from-[#FCD767]/50 to-[#01B0AB]/50 rounded-xl p-6 transform transition-all duration-500 hover:shadow-lg">
