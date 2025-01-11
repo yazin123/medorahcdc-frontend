@@ -45,6 +45,7 @@ const Testimonial = () => {
               </p>
               
               <div className="flex items-center">
+                  {testimonial.image && (
                 <div className="relative w-12 h-12 rounded-full overflow-hidden">
                   <Image
                      src={`${process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE_blog}${testimonial.image}`}
@@ -53,6 +54,7 @@ const Testimonial = () => {
                     className="object-cover"
                   />
                 </div>
+                  )}
                 
                 <div className="ml-4">
                   <h4 className="font-semibold text-gray-900">
