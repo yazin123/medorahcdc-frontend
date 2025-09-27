@@ -1,6 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react';
 import { FaPlus, FaEdit, FaTrash } from 'react-icons/fa';
+import Image from 'next/image';
 
 const GalleryPage = () => {
   const [gallery, setGallery] = useState([]);
@@ -33,11 +34,16 @@ const GalleryPage = () => {
         {gallery.map((image, index) => (
           <div key={index} className="group cursor-pointer" onClick={() => setSelectedImage(image)}>
             <div className="relative overflow-hidden rounded-lg">
-              <img
+              <Image
                 src={`${process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE_blog}${image.image}`}
                 alt={image.title}
+                width={500}
+                height={500}
                 className="w-full h-64 object-cover transform transition-transform duration-300 group-hover:scale-105"
               />
+         
+
+                  
               {/* Hover Overlay */}
               <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-300">
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
