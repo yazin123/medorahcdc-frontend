@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import React from 'react';
 import Script from 'next/script';  // Add this import
 import ContactButtons from "@/components/ContactButtons";
+import ChunkErrorHandler from "@/components/ChunkErrorHandler";
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -60,6 +61,7 @@ export default function RootLayout({ children }) {
       </head>
       <ClientComponent />
       <body className={`${poppins.variable} font-poppins`}>
+        <ChunkErrorHandler />
         <Navbar />
         <ContactButtons/>
         {children}
