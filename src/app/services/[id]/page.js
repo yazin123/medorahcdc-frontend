@@ -104,7 +104,7 @@ const SignsOf = ({ service }) => {
                 Signs your child may need to see {service.whoAttends? service.whoAttends : ''}
             </h1>
 
-            <p className="text-gray-600 mb-8 leading-relaxed mx-auto max-w-3xl">
+            <div className="text-gray-600 mb-8 leading-relaxed mx-auto max-w-3xl">
                 {stepsArray?.map((step) => (
                     <div key={step.number} className="flex items-start gap-4 hover:bg-white p-4 rounded-2xl transition">
                         <div className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full  font-semibold">
@@ -115,7 +115,7 @@ const SignsOf = ({ service }) => {
                         </div>
                     </div>
                 ))}
-            </p>
+            </div>
 
 
         </section>

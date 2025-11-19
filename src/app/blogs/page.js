@@ -16,7 +16,6 @@ const page = () => {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}blogs`);
       const data = await response.json();
       setBlogs(Array.isArray(data) ? data : []);
-      setLoading(false);
     } catch (err) {
 
       console.log("error fetching blogs", err)
