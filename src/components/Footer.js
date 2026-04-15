@@ -8,7 +8,6 @@ const Footer = () => {
     const [services, setServices] = useState([]);
     const [contacts, setContacts] = useState({});
     const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
-    const base_urlimg = process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE;
 
     useEffect(() => {
         fetchServices();

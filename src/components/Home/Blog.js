@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { HiArrowRight } from 'react-icons/hi';
 import Image from 'next/image';
+import { resolveMediaUrl } from '@/lib/mediaUrl';
 
 const BlogGrid = ({ articles }) => {
   
@@ -17,7 +18,7 @@ const BlogGrid = ({ articles }) => {
           >
             <div className="aspect-[4/3] relative">
               <Image
-                src={`${process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE_blog}${article.image[0]}`}
+                src={resolveMediaUrl(article.image?.[0])}
                 alt={article.title}
                 width={800}
                 height={800}

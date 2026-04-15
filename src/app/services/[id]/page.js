@@ -127,7 +127,6 @@ const Page = () => {
     const [service, setService] = useState(null);
     const [loading, setLoading] = useState(true);
     const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
-    const base_urlimg = process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE;
     const slugify = (text) => {
         return text
             .toLowerCase()

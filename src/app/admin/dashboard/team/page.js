@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaLinkedin, FaTwitter, FaFacebook, FaTrashAlt, FaEdit, FaUserPlus, FaTimes, FaImage, FaSpinner } from 'react-icons/fa';
 import AdminLayout from '../../admin';
+import { resolveMediaUrl } from '@/lib/mediaUrl';
 
 const TeamManagement = () => {
   const [team, setTeam] = useState([]);
@@ -319,7 +320,7 @@ const TeamManagement = () => {
                             {member.image && (
                                 <div className="relative h-48">
                                     <img
-                                        src={`${process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE_blog}${member.image}`}
+                                        src={resolveMediaUrl(member.image)}
                                         alt={member.name}
                                         className="w-full h-full object-cover"
                                         crossOrigin="anonymous"

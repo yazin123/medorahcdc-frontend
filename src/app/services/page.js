@@ -5,12 +5,12 @@ import Howweworks from '@/components/Home/HowweWorks';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
+import { resolveMediaUrl } from '@/lib/mediaUrl';
 
 const Services = () => {
     const [services, setServices] = useState([]);
     const [articles, setBlogs] = useState([]);
     const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
-    const base_urlimg = process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE;
     const slugify = (text) => {
         return text
             .toLowerCase()
@@ -67,7 +67,7 @@ const Services = () => {
                         <Link className="bg-white overflow-hidden " href={`/services/${slugify(service.title)}`} >
                             <div className="aspect-w-16 aspect-h-9 transition duration-300 hover:scale-105">
                                 <Image
-                                    src={`${process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE_blog}${service.imageUrl}`}
+                                    src={resolveMediaUrl(service.imageUrl)}
                                     alt={service.title}
                                     width={500}
                                     height={500}

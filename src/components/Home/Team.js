@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { resolveMediaUrl } from '@/lib/mediaUrl';
 
 const Team = () => {
   const [teamMembers, setTeam] = useState([]);
@@ -70,7 +71,7 @@ const Team = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <div className="relative h-96 lg:h-auto">
                 <Image
-                   src={`${process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE_blog}${featuredMember.image}`}
+                   src={resolveMediaUrl(featuredMember.image)}
                   alt={featuredMember.name}
                   width={5000} height={5000}
                   className="transform hover:scale-110 transition-transform duration-300 h-full w-full  object-cover"
@@ -105,7 +106,7 @@ const Team = () => {
             >
               <div className="relative h-72">
                 <Image
-                  src={`${process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE_blog}${member.image}`}
+                  src={resolveMediaUrl(member.image)}
                   alt={member.name}
                   width={500}
                   height={500}

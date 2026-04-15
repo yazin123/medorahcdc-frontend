@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaPlus, FaEdit, FaTrash } from 'react-icons/fa';
 import Image from 'next/image';
+import { resolveMediaUrl } from '@/lib/mediaUrl';
 
 const GalleryPage = () => {
   const [gallery, setGallery] = useState([]);
@@ -35,7 +36,7 @@ const GalleryPage = () => {
           <div key={index} className="group cursor-pointer" onClick={() => setSelectedImage(image)}>
             <div className="relative overflow-hidden rounded-lg">
               <Image
-                src={`${process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE_blog}${image.image}`}
+                src={resolveMediaUrl(image.image)}
                 alt={image.title}
                 width={500}
                 height={500}
@@ -79,7 +80,7 @@ const GalleryPage = () => {
           >
             <div className="relative">
               <img
-                src={`${process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE_blog}${selectedImage.image}`}
+                src={resolveMediaUrl(selectedImage.image)}
                 alt={selectedImage.title}
                 className="w-full h-auto"
               />

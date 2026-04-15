@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaEdit, FaTrash, FaSave, FaTimes } from 'react-icons/fa';
 import Image from 'next/image';
+import { resolveMediaUrl } from '@/lib/mediaUrl';
 
 const ServiceManagement = ({ service, onUpdate, onDelete, teams }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -131,7 +132,7 @@ const ServiceManagement = ({ service, onUpdate, onDelete, teams }) => {
           {service.imageUrl && (
             <div className="relative w-full h-48">
               <Image
-                src={`${process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE_blog}${service.imageUrl}`}
+                src={resolveMediaUrl(service.imageUrl)}
                 alt={service.title}
                 fill
                 className="object-cover"
@@ -254,7 +255,7 @@ const ServiceManagement = ({ service, onUpdate, onDelete, teams }) => {
               {(imagePreview || editedService.imageUrl) && (
                 <div className="mt-2 relative w-full h-48">
                   <Image
-                    src={imagePreview || `${process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE_blog}${editedService.imageUrl}`}
+                    src={imagePreview || resolveMediaUrl(editedService.imageUrl)}
                     alt="Preview"
                     fill
                     className="object-cover rounded-lg"

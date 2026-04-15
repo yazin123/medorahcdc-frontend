@@ -12,6 +12,7 @@ import {
   FaSpinner,
 } from 'react-icons/fa';
 import AdminLayout from '../../admin';
+import { resolveMediaUrl } from '@/lib/mediaUrl';
 
 // Create a custom Quill wrapper component
 const QuillWrapper = dynamic(
@@ -210,13 +211,13 @@ const BlogManagement = () => {
   const renderImagePreview = (previewData, index) => {
     const imageUrl = previewData.isNew
       ? previewData.url
-      : `${previewData.url}`;
+      : resolveMediaUrl(previewData.url);
 
     return (
       <div key={index} className="relative group">
         <div className="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden">
           <Image
-            src={`${process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE_blog}${imageUrl}`}
+            src={imageUrl}
             alt={`Preview ${index + 1}`}
             width={200}
             height={150}
@@ -401,7 +402,7 @@ const BlogManagement = () => {
                         {blog.image?.slice(0, 3).map((img, index) => (
                           <div key={index} className="h-8 w-8 rounded-full border-2 border-white overflow-hidden">
                             <Image
-                              src={`${process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE_blog}${img}`}
+                              src={resolveMediaUrl(img)}
                               alt={`Blog image ${index + 1}`}
                               width={32}
                               height={32}

@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaPlus, FaEdit, FaTrash } from 'react-icons/fa';
 import AdminLayout from '../../admin';
+import { resolveMediaUrl } from '@/lib/mediaUrl';
 
 const GalleryAdmin = () => {
     const [gallery, setGallery] = useState([]);
@@ -100,7 +101,7 @@ const GalleryAdmin = () => {
                             <tr key={item._id} className="hover:bg-gray-100">
                                 <td className="p-2 border">
                                     <img
-                                        src={`${process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE_blog}${item.image}`}
+                                        src={resolveMediaUrl(item.image)}
                                         alt={item.title}
                                         className="w-20 h-20 object-cover rounded"
                                         crossOrigin='anonymous'
@@ -182,7 +183,7 @@ const GalleryAdmin = () => {
                                                         </label>
                                                         {selectedItem && (
                                                             <img
-                                                                src={`${process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE_blog}${selectedItem.image}`}
+                                                                src={resolveMediaUrl(selectedItem.image)}
                                                                 alt="Current"
                                                                 className="w-32 h-32 object-cover mb-2 rounded"
                                                             />

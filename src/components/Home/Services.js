@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { useRef, useState, useEffect } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { resolveMediaUrl } from '@/lib/mediaUrl';
 
 
 const Services = () => {
@@ -100,7 +101,7 @@ const Services = () => {
               <div className="bg-white  overflow-hidden ">
                 <div className="aspect-w-16 aspect-h-9 mb-4">
                   <Image
-                    src={`${process.env.NEXT_PUBLIC_API_BASE_URL_IMAGE_blog}${service.imageUrl}`}
+                    src={resolveMediaUrl(service.imageUrl)}
                     alt={service.title}
                     width={500}
                     height={500}
